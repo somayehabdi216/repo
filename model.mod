@@ -376,12 +376,12 @@ subject to{
            
           /*    forall(i in No_tasks_t1)
                 ST[i]>=ST[i-1]+RT[i-1]+DTT[i];     */
-                
-                
-        forall(d in D)
+           
+         forall(d in D)
             forall(k in No_cloud)
               forall(j in No_instance)
-                ST[d.i]>=ST[d.t]+RT[d.t]+(taud[d.i][d.t][k][j]*(workflow[d.t].ODS/VM[k][j].bw))+(cd[d.i][d.t]*(workflow[d.t].ODS/bw_c));
+                 ST[d.i]>=ST[d.t]+RT[d.t]+(taud[d.i][d.t][k][j]*(workflow[d.t].ODS/VM[k][j].bw))+(cd[d.i][d.t]*(workflow[d.t].ODS/bw_c));
+               //ST[d.i]>=maxl(ST[d.t]+RT[d.t]+(taud[d.i][d.t][k][j]*(workflow[d.t].ODS/VM[k][j].bw))+(cd[d.i][d.t]*(workflow[d.t].ODS/bw_c)));
                 
              
 //************************************ makespan *********************************************
@@ -451,7 +451,7 @@ execute{
 	//The getTime function returns the number of milliseconds since 00:00:00 UTC, January 1, 1970.
 	
 	
-    writeln("**************************************:  "+ cplex.getBestObjValue());  
+    writeln("Cost- objective function: "+ cplex.getBestObjValue());  
     //writeln(" time of executing: "+cplex.getCplexTime()); 
     writeln("NbinVars:  "+cplex.getNbinVars());
     writeln("time stamp: "+cplex.getDetTime());
@@ -461,8 +461,22 @@ execute{
     writeln("NMIPStarts: "+cplex.getNMIPStarts());
   //   writeln("solve time: "+cplex.getSolvedTime()); 
   //  writeln("getMIPStartName(0): "+cplex.getMIPStartIndex("m1")); 
-    writeln("is MIP: "+ cplex.isMIP()); 
+    writeln("is MIP: "+ cplex.isMIP());     
+    writeln("**************************************************");    
+      
+      
+      
+   // ................ post-processing ................................... 
+  // ................. Task assignment ...................................     
      
+    for(i in No_task)
+        for(k in No_cloud)    
+          for(j in No_instance)  
+              for(l in No_vm)  
+                  if(y[i][k][j][l]==1){   
+                     writeln("BoT ", i, " assigned to cloud ", k," instance type ", j," Start time: ", ST[i]);  
+                    // writeln("BoT ", ST[i]);             
+                }                  
 	
 }
 

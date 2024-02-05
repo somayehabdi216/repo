@@ -2,7 +2,7 @@ n=7;        // No of tasks
 cloud_no=2;          // No of cloud providers   				
 instance_no=5;          // No of instance types   				
 vm_no=1;          // No of vms   				
-Dl=.7;          // deadline of the workflow   				
+Dl=.3;          // deadline of the workflow   				
 bw_c=100;          // bw between public and private cloud  				
 dtc=.02;          // data transfer cost between public and private cloud  				
 				
@@ -13,11 +13,11 @@ dtc=.02;          // data transfer cost between public and private cloud
  // OPenALPR				
  // workflow[<i,TS, cardinality,Mem,IDs,ODS, ET]				
  workflow=[				
- < 1,1,1,2,10,10,.1>				
+ < 1,2,1,2,10,10,.1>				
  < 2,2,1,8,3,10,.1>				
  < 3,2,1,8,3,10,.1>				
  < 4,2,3,2,3,10,.1>				
- < 5,1,3,2,3,10,.1>				
+ < 5,2,3,2,3,10,.1>				
  < 6,2,1,2,3,10,.1>				
  < 7,2,1,2,3,10,.1>				
  ];				
